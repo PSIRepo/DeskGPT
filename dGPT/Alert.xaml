@@ -1,0 +1,113 @@
+﻿<Window x:Class="dGPT.Alert"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Name="AlertF"
+        mc:Ignorable="d"
+        Title="DeskGPT" Topmost="True" KeyDown="AlertF_KeyDown" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" AllowsTransparency="True" Height="147" Width="337" WindowStyle="None" ResizeMode="NoResize" Background="Transparent">
+    <Border Background="#FF395372" BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15">
+        <Grid Background="Transparent" RenderTransformOrigin="0.5,0.5" Margin="1,-1,-1,0" Height="NaN">
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <Button PreviewMouseLeftButtonUp="CloseB_PreviewMouseLeftButtonUp" x:Name="CloseB" Style="{DynamicResource ButtonStyle1}" Margin="0,0,-13,0" Background="{x:Null}" BorderBrush="{x:Null}" Height="38" VerticalAlignment="Top" HorizontalAlignment="Right" Width="68">
+                <Image x:Name="CloseBBut" Height="20" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="17">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="imgs/closeI.png" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="imgs/closeH.png" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
+            <Grid MouseDown="Grid_MouseDown" Background="#FF395372" Margin="0,10,42,108" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="68*" />
+                    <ColumnDefinition Width="228*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="titleB" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Confirm" VerticalAlignment="Top" Foreground="White" Height="44" Grid.Column="2" HorizontalAlignment="Left" Width="100" Margin="45,-16,0,0" FontSize="20" />
+            </Grid>
+            <TextBlock x:Name="messageB" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Are you sure you want to exit without saving your changes?" FontSize="20" Foreground="White" VerticalAlignment="Top" Height="62" Width="315" Margin="0,38,0,0" />
+            <Button x:Name="YesB" Style="{DynamicResource ButtonStyle1}" Width="102" FontSize="20" Foreground="White" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,106,0,0" BorderBrush="#FF385372" Background="#FF39CC98" IsDefault="True" Click="Button1_Click" RenderTransformOrigin="0.5,0.5" Content="Yes">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF39CC48" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Button.Resources>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="NoB" Style="{DynamicResource ButtonStyle1}" Width="102" FontSize="20" Foreground="White" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="191,106,0,0" BorderBrush="#FF385372" Background="#FFFF6A6A" IsDefault="True" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Content="No">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Button.Resources>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Visibility="Hidden" x:Name="ConfirmB" Style="{DynamicResource ButtonStyle1}" Width="181" FontSize="20" Foreground="White" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,106,0,0" BorderBrush="#FF385372" Background="#FF39B1CC" IsDefault="True" Click="ConfirmB_Click"  RenderTransformOrigin="0.5,0.5" Content="Okay">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF39CC48" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Button.Resources>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+    </Border>
+</Window>

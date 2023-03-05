@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <ApplicationIcon>dGPT.ico</ApplicationIcon>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <Title></Title>
+    <PackageId></PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="cleanI.png" />
+    <None Remove="dGPT.ico" />
+    <None Remove="dGPT.PNG" />
+    <None Remove="imgs\cleanH.png" />
+    <None Remove="imgs\cleanI.png" />
+    <None Remove="imgs\closeH.png" />
+    <None Remove="imgs\closeI.png" />
+    <None Remove="imgs\dGPT.PNG" />
+    <None Remove="imgs\reset.png" />
+    <None Remove="imgs\save.png" />
+    <None Remove="imgs\sendb.png" />
+    <None Remove="imgs\typing.gif" />
+    <None Remove="reset.png" />
+    <None Remove="save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="dGPT.ico" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <Resource Include="cleanI.png" />
+    <Resource Include="imgs\cleanH.png" />
+    <Resource Include="imgs\cleanI.png" />
+    <Resource Include="imgs\closeH.png" />
+    <Resource Include="imgs\closeI.png" />
+    <Resource Include="imgs\reset.png" />
+    <Resource Include="imgs\save.png" />
+    <Resource Include="imgs\typing.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3-beta1" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="dGPT.ico" />
+    <Resource Include="dGPT.PNG" />
+    <Resource Include="imgs\dGPT.PNG" />
+    <Resource Include="imgs\sendb.png" />
+    <Resource Include="reset.png" />
+    <Resource Include="save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Settings1.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

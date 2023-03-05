@@ -1,0 +1,131 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:dGPT"
+    x:Name="Window1" x:Class="dGPT.MainWindow"
+    mc:Ignorable="d"
+        Title="DeskGPT" Loaded="Window1_Loaded_1" Topmost="True" ShowInTaskbar="False" AllowsTransparency="True" Height="669" Width="447" WindowStyle="None" ResizeMode="CanResize" Background="Transparent" VerticalAlignment="Bottom">
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="6" CaptionHeight="0" CornerRadius="15,15,15,15" GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
+    <Border Background="#FF395372" BorderBrush="Transparent" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15">
+        <Grid Name="BG" Background="Transparent">
+            <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Right" Width="74" Height="98" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid MouseDown="Grid_MouseDown" Background="#FF395372" Margin="9,5,4,0" Height="64" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="12,12,12,12" BorderThickness="6" Padding="4" Margin="0,0,22,0" Grid.ColumnSpan="2" Height="68" VerticalAlignment="Center" HorizontalAlignment="Right" Width="54">
+                    <Button LostFocus="Clean_LostFocus" PreviewMouseLeftButtonUp="Clean_PreviewMouseLeftButtonUp" x:Name="Clean" Style="{DynamicResource ButtonStyle1}" Margin="-6,8,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34">
+                        <Image Height="22" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="27">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="imgs/cleanI.png" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Source" Value="imgs/cleanH.png" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Button>
+                </Border>
+                <Button MouseEnter="CloseB_MouseEnter_1" MouseLeave="CloseB_MouseLeave_1" PreviewMouseLeftButtonUp="CloseB_PreviewMouseLeftButtonUp" x:Name="CloseB" Style="{DynamicResource ButtonStyle1}" Margin="0,0,4,0" Background="{x:Null}" BorderBrush="{x:Null}" Height="54" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="39">
+                    <Image Name="CloseBBut" Height="23" RenderTransformOrigin="0.5,0.5" Width="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="imgs/closeI.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="imgs/closeH.png" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1" />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+                <Label x:Name="Title" Content="DeskGPT" Foreground="White" Grid.Column="1" FontSize="20" Height="44" VerticalAlignment="Center" HorizontalAlignment="Center" Width="92" />
+                <Image HorizontalAlignment="Left" Width="48" Height="44" VerticalAlignment="Center" Source="/dGPT.PNG" Grid.Column="1">
+                    <Image.ContextMenu>
+                        <ContextMenu BorderBrush="#FF2C3D53" Name="cm" Foreground="White" Background="#FF2C3D53" Opened="cm_Opened" StaysOpen="True">
+                            <MenuItem Style="{DynamicResource PopupMenuItem}" Header="Settings" Click="MenuItem_Click" />
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                </Image>
+                <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="Confirm" IsEnabled="False" Grid.Column="1" Margin="0,0,73,23" Text="Click again to clear" VerticalAlignment="Bottom" Background="#FF395372" BorderBrush="{x:Null}" Foreground="White" FontSize="18" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="0" Height="26">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+            </Grid>
+            <ScrollViewer x:Name="ConversationScrollViewer" VerticalScrollBarVisibility="Hidden" Margin="10,72,10,107">
+                <StackPanel Orientation="Vertical"
+                      x:Name="ConversationContentContainer"
+                      VerticalAlignment="Top">
+                    <local:ConversationView x:Name="conversationView" />
+                </StackPanel>
+            </ScrollViewer>
+            <Button Style="{DynamicResource ButtonStyle1}" Width="48" Height="81" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" BorderBrush="#FF385372" Background="#FF425EF4" IsDefault="True" Click="Button_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Button.Resources>
+                <Image Width="30" Height="30" Source="imgs/sendb.png" HorizontalAlignment="Center" />
+            </Button>
+            <TextBox Style="{DynamicResource TextBoxStyle2}"  x:Name="ChtSnd" VerticalAlignment="Bottom" Margin="10,0,58,10" TextWrapping="Wrap" Height="81" FontSize="20" BorderBrush="#FF385372" Background="#FF2C3D53" Foreground="White">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button x:Name="CancelB" Style="{DynamicResource ButtonStyle1}" Width="25" FontSize="16" Foreground="White" Height="27" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="#FF385372" Background="#FFFF6A6A" IsDefault="True" Visibility="Hidden" Click="CancelB_Click"  RenderTransformOrigin="0.5,0.5" Content="X" Margin="542,741,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Button.Resources>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="dGPT.ConversationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:local="clr-namespace:dGPT"
+             mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="460">
+
+    <UserControl.Resources>
+        <local:StringFormatConverter x:Key="StringFormatConverter" />
+
+        <Style TargetType="TextBox" x:Key="TextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="MediumSeaGreen" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBlockStyleA">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="MediumSeaGreen" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TimestampStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBlockStyleM">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="SteelBlue" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+
+        <!--Me under you-->
+        <DataTemplate x:Key="A">
+            <Grid Margin="30, 60, 5, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <Rectangle Fill="SteelBlue"
+                           Grid.RowSpan="2" />
+                <TextBox Text="{Binding Path=Text}"
+                             Style="{StaticResource TextBlockStyleM}" />
+                <Path Data="m 0,0 l 16,0 l 0,16 l -16,-16"
+                    Fill="SteelBlue"
+                    Margin="0,-1,5,0"
+                    HorizontalAlignment="Right"
+                    Grid.Row="2" />
+            </Grid>
+        </DataTemplate>
+        <!--You typing-->
+        <DataTemplate x:Key="T">
+            <Grid Margin="5, 15, 30, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <Image VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderSize="24,11" gif:ImageBehavior.AnimatedSource="imgs/typing.gif" gif:ImageBehavior.RepeatBehavior="Forever" Stretch="None" />
+            </Grid>
+        </DataTemplate>
+        <!--Error-->
+        <DataTemplate x:Key="E">
+            <Grid Margin="5, 0, 30, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <TextBlock VerticalAlignment="Bottom" FontSize="18" Text="{Binding Path=Text}" HorizontalAlignment="Left" TextWrapping="Wrap" RenderSize="24,11" Background="#FF395372" Foreground="#FFFF3333" />
+            </Grid>
+        </DataTemplate>
+        <!--You under me-->
+        <DataTemplate x:Key="B">
+            <Grid Margin="5, -31, 30, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <Path Data="m 0,0 l 0,16 l 16,0 l -16,-16"
+                        Fill="MediumSeaGreen"
+                        Margin="5,0,0,-1"
+                        HorizontalAlignment="Left" />
+                <Rectangle Fill="MediumSeaGreen"
+                             Grid.Row="1" Grid.RowSpan="2" />
+                <TextBox Text="{Binding Path=Text}"
+                             Style="{StaticResource TextBlockStyle}"
+                             Grid.Row="1" />
+                <TextBlock Text="{Binding Path=Timestamp}"
+                             Style="{StaticResource TimestampStyle}"
+                             Grid.Row="2" />
+            </Grid>
+        </DataTemplate>
+        <!--You under you-->
+        <DataTemplate x:Key="C">
+            <Grid Margin="5, 15, 30, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <Path Data="m 0,0 l 0,16 l 16,0 l -16,-16"
+                        Fill="MediumSeaGreen"
+                        Margin="5,0,0,-1"
+                        HorizontalAlignment="Left" />
+                <Rectangle Fill="MediumSeaGreen"
+                             Grid.Row="1" Grid.RowSpan="2" />
+                <TextBox Text="{Binding Path=Text}"
+                             Style="{StaticResource TextBlockStyle}"
+                             Grid.Row="1" />
+                <TextBlock Text="{Binding Path=Timestamp}"
+                             Style="{StaticResource TimestampStyle}"
+                             Grid.Row="2" />
+            </Grid>
+        </DataTemplate>
+        <!--Me under me-->
+        <DataTemplate x:Key="D">
+            <Grid Margin="30, 15, 5, 0"
+                      local:GridUtils.RowDefinitions=",,">
+                <Rectangle Fill="SteelBlue"
+                           Grid.RowSpan="2" />
+                <TextBox Text="{Binding Path=Text}"
+                             Style="{StaticResource TextBlockStyleM}" />
+                <Path Data="m 0,0 l 16,0 l 0,16 l -16,-16"
+                    Fill="SteelBlue"
+                    Margin="0,-1,5,0"
+                    HorizontalAlignment="Right"
+                    Grid.Row="2" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="#FF395372">
+        <ItemsControl ItemsSource="{Binding}" Foreground="#FF395372">
+            <ItemsControl.ItemTemplateSelector>
+                <local:MessageTemplateSelector
+                A="{StaticResource A}"
+                B="{StaticResource B}"
+                C="{StaticResource C}"
+                D="{StaticResource D}"
+                E="{StaticResource E}"
+                T="{StaticResource T}" />
+            </ItemsControl.ItemTemplateSelector>
+        </ItemsControl>
+    </Grid>
+</UserControl>
