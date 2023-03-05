@@ -3,7 +3,7 @@
 ![alt text](https://i.postimg.cc/wBL8s3c9/1.png)
 ![alt text](https://i.postimg.cc/NMth8Ypm/2.png)
 
-Lightweight C# Open API Desktop Client (GPT 3.5 & GPT 3.0)
+Lightweight C# OpenAI API Desktop Client (GPT 3.5 & GPT 3.0)
 
 In order to use, you must update your OpenAI API key in the app settings:
 1. Create an OpenAI account
